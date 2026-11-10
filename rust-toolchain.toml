@@ -1,0 +1,5 @@
+# Same toolchain as the Containerfile, so CI lints match local ones.
+[toolchain]
+channel = "1.98.1"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

@@ -1,0 +1,5 @@
+# Allowlist: only what the build needs enters the build context.
+*
+!Cargo.toml
+!Cargo.lock
+!src/

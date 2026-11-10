@@ -1,0 +1,27 @@
+[package]
+name = "printer_exporter"
+version = "0.1.0"
+edition = "2021"
+description = "Prometheus exporter for SNMP v2c network printers (Printer-MIB, Host-Resources-MIB, IF-MIB)"
+publish = false
+
+# Deliberately no dependencies: SNMP/BER, HTTP and flag parsing are all small
+# enough to hand-roll on std, mirroring the pure-stdlib Python reference.
+[dependencies]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+# Prometheus samples are f64 by definition; counters above 2^53 lose
+# precision there no matter what the exporter does.
+cast_precision_loss = "allow"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+# Arithmetic on device-supplied numbers should fail loudly, not wrap. A panic
+# during a scrape is caught and reported as `printer_up 0`.
+overflow-checks = true
