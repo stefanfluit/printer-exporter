@@ -8,7 +8,7 @@
 # Official Rust image, pinned by digest so the toolchain cannot change under
 # us. Alpine's Rust targets musl and links statically by default, which is
 # what lets the result run in an image with no libc at all.
-FROM docker.io/library/rust:1.98.1-alpine3.24@sha256:7cc1c22d77d9432f7fe012a70e6d3e555af54c2a6832700ed7d553f1769ae89f AS build
+FROM docker.io/library/rust:1.100.0-alpine3.24@sha256:de1e0058543a81ed7b046629167db587c67a94bdf37cce14eb27f0ec83baaffb AS build
 
 # Optional cap on parallel rustc jobs, e.g. --build-arg CARGO_BUILD_JOBS=4.
 ARG CARGO_BUILD_JOBS
